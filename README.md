@@ -22,6 +22,12 @@
 	3. Ejecute y revise la salida por pantalla. 
 	4. Cambie el incio con 'start()' por 'run()'. Cómo cambia la salida?, por qué?.
 
+
+   Con el método start los hilos empiezan y terminan de forma no deterministica, mientras que con el método run
+    se observa un orden secuencial como se observa a continuación. 
+![img.png](img/metodoStart.png)
+![metodoRun.png](img/metodoRun.png)
+
 **Parte II - Ejercicio Black List Search**
 
 
