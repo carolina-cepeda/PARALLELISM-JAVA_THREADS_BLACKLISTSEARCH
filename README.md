@@ -65,13 +65,14 @@ Para 'refactorizar' este código, y hacer que explote la capacidad multi-núcleo
 1. Cree una clase de tipo Thread que represente el ciclo de vida de un hilo que haga la búsqueda de un segmento del conjunto de servidores disponibles. Agregue a dicha clase un método que permita 'preguntarle' a las instancias del mismo (los hilos) cuantas ocurrencias de servidores maliciosos ha encontrado o encontró.
 
 Creamos la clase "BlackListSearchThread":
-![BlackListSearchThread.png](img\BlackListSearchThread.png)
+
+![BlackListSearchThread.png](img/BlackListSearchThread.png)
 
 2. Agregue al método 'checkHost' un parámetro entero N, correspondiente al número de hilos entre los que se va a realizar la búsqueda (recuerde tener en cuenta si N es par o impar!). Modifique el código de este método para que divida el espacio de búsqueda entre las N partes indicadas, y paralelice la búsqueda a través de N hilos. Haga que dicha función espere hasta que los N hilos terminen de resolver su respectivo sub-problema, agregue las ocurrencias encontradas por cada hilo a la lista que retorna el método, y entonces calcule (sumando el total de ocurrencuas encontradas por cada hilo) si el número de ocurrencias es mayor o igual a _BLACK_LIST_ALARM_COUNT_. Si se da este caso, al final se DEBE reportar el host como confiable o no confiable, y mostrar el listado con los números de las listas negras respectivas. Para lograr este comportamiento de 'espera' revise el método [join](https://docs.oracle.com/javase/tutorial/essential/concurrency/join.html) del API de concurrencia de Java. Tenga también en cuenta:
 
 Añadimos un nuevo metodo "chechkHost" a "HostBlcakListsValidator":
 
-![chechkHost.png](img\chechkHost.png)
+![chechkHost.png](img/chechkHost.png)
 
 	* Dentro del método checkHost Se debe mantener el LOG que informa, antes de retornar el resultado, el número de listas negras revisadas VS. el número de listas negras total (línea 60). Se debe garantizar que dicha información sea verídica bajo el nuevo esquema de procesamiento en paralelo planteado.
 
@@ -80,15 +81,15 @@ Añadimos un nuevo metodo "chechkHost" a "HostBlcakListsValidator":
 
 - 212.24.24.55
 
-![212.24.24.55.png](img\212.24.24.55.png)
+![212.24.24.55.png](img/212.24.24.55.png)
 
 - 202.24.34.55
 
-![212.24.24.55.png](img\212.24.24.55.png)
+![212.24.24.55.png](img/212.24.24.55.png)
 
 - 200.24.34.55
 
-![200.24.34.55.png](img\200.24.34.55.png)
+![200.24.34.55.png](img/200.24.34.55.png)
 
 **Parte II.I Para discutir la próxima clase (NO para implementar aún)**
 
@@ -100,39 +101,39 @@ A partir de lo anterior, implemente la siguiente secuencia de experimentos para 
 
 1. Un solo hilo.
 
-![1hilo.png](img\1hilo.png)
+![1hilo.png](img/1hilo.png)
 
-![1hilos-G.png](img\1hilos-G.png)
+![1hilos-G.png](img/1hilos-G.png)
 
 2. Tantos hilos como núcleos de procesamiento (haga que el programa determine esto haciendo uso del [API Runtime](https://docs.oracle.com/javase/7/docs/api/java/lang/Runtime.html)). (16 hilos)
 
-![16hilos.png](img\16hilos.png)
+![16hilos.png](img/16hilos.png)
 
-![16hilos-G.png](img\16hilos-G.png)
+![16hilos-G.png](img/16hilos-G.png)
 
 3. Tantos hilos como el doble de núcleos de procesamiento. (32 hilos)
 
-![32hilos.png](img\32hilos.png)
+![32hilos.png](img/32hilos.png)
 
-![32hilos-G.png](img\32hilos-G.png)
+![32hilos-G.png](img/32hilos-G.png)
 
 4. 50 hilos.
 
-![50hilos.png](img\50hilos.png)
+![50hilos.png](img/50hilos.png)
 
-![50hilos-G.png](img\50hilos-G.png)
+![50hilos-G.png](img/50hilos-G.png)
 
 5. 100 hilos.
 
-![100hilos.png](img\100hilos.png)
+![100hilos.png](img/100hilos.png)
 
-![100hilos-G.png](img\100hilos-G.png)
+![100hilos-G.png](img/100hilos-G.png)
 
 Al iniciar el programa ejecute el monitor jVisualVM, y a medida que corran las pruebas, revise y anote el consumo de CPU y de memoria en cada caso. ![](img/jvisualvm.png)
 
 Con lo anterior, y con los tiempos de ejecución dados, haga una gráfica de tiempo de solución vs. número de hilos. Analice y plantee hipótesis con su compañero para las siguientes preguntas (puede tener en cuenta lo reportado por jVisualVM):
 
-![grafica.png](img\grafica.png)
+![grafica.png](img/grafica.png)
 
 - Se puedo notar que la cantidad de hilos implica en gran medida el tiempo de ejecucion del programa.
 
