@@ -16,8 +16,7 @@ public class Main {
     public static void main(String a[]) {
         HostBlackListsValidator hblv = new HostBlackListsValidator();
 
-        int numberOfThreads = Runtime.getRuntime().availableProcessors() * 2; // Puedes ajustar este valor según tus
-        // necesidades
+        int numberOfThreads = 32; //Runtime.getRuntime().availableProcessors()
         System.out.println("Using " + numberOfThreads + " threads");
 
         long startTime = System.currentTimeMillis();

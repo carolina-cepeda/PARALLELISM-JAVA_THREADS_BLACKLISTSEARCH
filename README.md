@@ -70,6 +70,7 @@ Creamos la clase "BlackListSearchThread":
 2. Agregue al método 'checkHost' un parámetro entero N, correspondiente al número de hilos entre los que se va a realizar la búsqueda (recuerde tener en cuenta si N es par o impar!). Modifique el código de este método para que divida el espacio de búsqueda entre las N partes indicadas, y paralelice la búsqueda a través de N hilos. Haga que dicha función espere hasta que los N hilos terminen de resolver su respectivo sub-problema, agregue las ocurrencias encontradas por cada hilo a la lista que retorna el método, y entonces calcule (sumando el total de ocurrencuas encontradas por cada hilo) si el número de ocurrencias es mayor o igual a _BLACK_LIST_ALARM_COUNT_. Si se da este caso, al final se DEBE reportar el host como confiable o no confiable, y mostrar el listado con los números de las listas negras respectivas. Para lograr este comportamiento de 'espera' revise el método [join](https://docs.oracle.com/javase/tutorial/essential/concurrency/join.html) del API de concurrencia de Java. Tenga también en cuenta:
 
 Añadimos un nuevo metodo "chechkHost" a "HostBlcakListsValidator":
+
 ![alt text](img\chechkHost.png)
 
 	* Dentro del método checkHost Se debe mantener el LOG que informa, antes de retornar el resultado, el número de listas negras revisadas VS. el número de listas negras total (línea 60). Se debe garantizar que dicha información sea verídica bajo el nuevo esquema de procesamiento en paralelo planteado.
@@ -78,10 +79,15 @@ Añadimos un nuevo metodo "chechkHost" a "HostBlcakListsValidator":
 
 
 - 212.24.24.55
+
 ![alt text](img\212.24.24.55.png)
+
 - 202.24.34.55
+
 ![alt text](img\212.24.24.55.png)
+
 - 200.24.34.55
+
 ![alt text](img\200.24.34.55.png)
 
 **Parte II.I Para discutir la próxima clase (NO para implementar aún)**
@@ -96,25 +102,39 @@ A partir de lo anterior, implemente la siguiente secuencia de experimentos para 
 
 ![alt text](img\1hilo.png)
 
+![alt text](img\1hilos-G.png)
+
 2. Tantos hilos como núcleos de procesamiento (haga que el programa determine esto haciendo uso del [API Runtime](https://docs.oracle.com/javase/7/docs/api/java/lang/Runtime.html)). (16 hilos)
 
 ![alt text](img\16hilos.png)
+
+![alt text](img\16hilos-G.png)
 
 3. Tantos hilos como el doble de núcleos de procesamiento. (32 hilos)
 
 ![alt text](img\32hilos.png)
 
+![alt text](img\32hilos-G.png)
+
 4. 50 hilos.
 
 ![alt text](img\50hilos.png)
+
+![alt text](img\50hilos-G.png)
 
 5. 100 hilos.
 
 ![alt text](img\100hilos.png)
 
+![alt text](img\100hilos-G.png)
+
 Al iniciar el programa ejecute el monitor jVisualVM, y a medida que corran las pruebas, revise y anote el consumo de CPU y de memoria en cada caso. ![](img/jvisualvm.png)
 
 Con lo anterior, y con los tiempos de ejecución dados, haga una gráfica de tiempo de solución vs. número de hilos. Analice y plantee hipótesis con su compañero para las siguientes preguntas (puede tener en cuenta lo reportado por jVisualVM):
+
+![alt text](img\grafica.png)
+
+- Se puedo notar que la cantidad de hilos implica en gran medida el tiempo de ejecucion del programa.
 
 **Parte IV - Ejercicio Black List Search**
 
