@@ -16,12 +16,13 @@ public class Main {
     public static void main(String a[]) {
         HostBlackListsValidator hblv = new HostBlackListsValidator();
 
-        int numberOfThreads = 15; // Puedes ajustar este valor según tus necesidades
+        int numberOfThreads = Runtime.getRuntime().availableProcessors() * 2; // Puedes ajustar este valor según tus
+        // necesidades
         System.out.println("Using " + numberOfThreads + " threads");
 
         long startTime = System.currentTimeMillis();
 
-        List<Integer> blackListOcurrences = hblv.checkHost("200.24.34.55", numberOfThreads); // 212.24.24.55 Reported as
+        List<Integer> blackListOcurrences = hblv.checkHost("202.24.34.55", numberOfThreads); // 212.24.24.55 Reported as
                                                                                              // trustworthy
                                                                                              // 202.24.34.55 Reported as
                                                                                              // NOT trustworthy
