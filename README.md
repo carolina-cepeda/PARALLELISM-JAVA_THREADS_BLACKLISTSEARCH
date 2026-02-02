@@ -27,11 +27,16 @@
 
    Con el método start los hilos empiezan y terminan de forma no deterministica, mientras que con el método run
     se observa un orden secuencial como se observa a continuación. 
+
+- Con el metodo "start()" el metodo deja de ser determinista y se puede obsevar en la salida de la terminal.
+
 ![img.png](img/metodoStart.png)
+
+- Ahora con el metodo "run()" se puede ver que la salida de la terminal si es determinista.
+
 ![metodoRun.png](img/metodoRun.png)
 
 **Parte II - Ejercicio Black List Search**
-
 
 Para un software de vigilancia automática de seguridad informática se está desarrollando un componente encargado de validar las direcciones IP en varios miles de listas negras (de host maliciosos) conocidas, y reportar aquellas que existan en al menos cinco de dichas listas. 
 
@@ -49,6 +54,7 @@ INFO: HOST 205.24.34.55 Reported as trustworthy
 
 INFO: HOST 205.24.34.55 Reported as NOT trustworthy
 
+![alt text](img/image.png)
 
 Al programa de prueba provisto (Main), le toma sólo algunos segundos análizar y reportar la dirección provista (200.24.34.55), ya que la misma está registrada más de cinco veces en los primeros servidores, por lo que no requiere recorrerlos todos. Sin embargo, hacer la búsqueda en casos donde NO hay reportes, o donde los mismos están dispersos en las miles de listas negras, toma bastante tiempo.
 
@@ -58,12 +64,25 @@ Para 'refactorizar' este código, y hacer que explote la capacidad multi-núcleo
 
 1. Cree una clase de tipo Thread que represente el ciclo de vida de un hilo que haga la búsqueda de un segmento del conjunto de servidores disponibles. Agregue a dicha clase un método que permita 'preguntarle' a las instancias del mismo (los hilos) cuantas ocurrencias de servidores maliciosos ha encontrado o encontró.
 
+Creamos la clase "BlackListSearchThread":
+![alt text](img\BlackListSearchThread.png)
+
 2. Agregue al método 'checkHost' un parámetro entero N, correspondiente al número de hilos entre los que se va a realizar la búsqueda (recuerde tener en cuenta si N es par o impar!). Modifique el código de este método para que divida el espacio de búsqueda entre las N partes indicadas, y paralelice la búsqueda a través de N hilos. Haga que dicha función espere hasta que los N hilos terminen de resolver su respectivo sub-problema, agregue las ocurrencias encontradas por cada hilo a la lista que retorna el método, y entonces calcule (sumando el total de ocurrencuas encontradas por cada hilo) si el número de ocurrencias es mayor o igual a _BLACK_LIST_ALARM_COUNT_. Si se da este caso, al final se DEBE reportar el host como confiable o no confiable, y mostrar el listado con los números de las listas negras respectivas. Para lograr este comportamiento de 'espera' revise el método [join](https://docs.oracle.com/javase/tutorial/essential/concurrency/join.html) del API de concurrencia de Java. Tenga también en cuenta:
+
+Añadimos un nuevo metodo "chechkHost" a "HostBlcakListsValidator":
+![alt text](img\chechkHost.png)
 
 	* Dentro del método checkHost Se debe mantener el LOG que informa, antes de retornar el resultado, el número de listas negras revisadas VS. el número de listas negras total (línea 60). Se debe garantizar que dicha información sea verídica bajo el nuevo esquema de procesamiento en paralelo planteado.
 
 	* Se sabe que el HOST 202.24.34.55 está reportado en listas negras de una forma más dispersa, y que el host 212.24.24.55 NO está en ninguna lista negra.
 
+
+- 212.24.24.55
+![alt text](img\212.24.24.55.png)
+- 202.24.34.55
+![alt text](img\212.24.24.55.png)
+- 200.24.34.55
+![alt text](img\200.24.34.55.png)
 
 **Parte II.I Para discutir la próxima clase (NO para implementar aún)**
 
